@@ -10,11 +10,14 @@ describe("MovieSearch", () => {
     // test buildUrl function
     describe("buildUrl", () => {
         it("should return an OMDB movie search URL using a movie name", () => {
+            // - Arrange -
             // initialize object
             const movie = new MovieSearch();
             const name = "Rocky";
+            // - Act -
             // build url with provided string
             const url = movie.buildUrl(name);
+            // - Assert - 
             // check that the result is as expected
             expect(url).toEqual(`https://www.omdbapi.com/?t=${name}&apikey=trilogy`);
         });
@@ -23,14 +26,17 @@ describe("MovieSearch", () => {
     // test search API function
     describe("search", () => {
         it("should search the OMDB API for a given movie", () => {
+            // - Arrange -
             const movie = new MovieSearch();
             const name = "Rocky";
+            // - Act -
             // get a mock object from API
             axios.get.mockReturnValue(
                 new Promise(function(resolve) {
                     resolve({ data: {} });
                 })
             );
+            // - Assert - 
             //check that the mock results equal to the data object expected
             expect(movie.search(name)).resolves.toEqual({ data: {} });
             //check the last call was with the expected API URL
